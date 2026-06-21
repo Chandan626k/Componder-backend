@@ -4,7 +4,7 @@
  * Returns server status, OpenAI key presence (NOT the key itself), cache stats.
  */
 
-import { cacheStats } from '../lib/cache.js';
+
 
 export default function handler(req, res) {
   const hasKey    = !!(process.env.OPENAI_API_KEY?.startsWith('sk-'));
@@ -20,7 +20,7 @@ export default function handler(req, res) {
       model,
       keyPrefix  : hasKey ? process.env.OPENAI_API_KEY.slice(0, 7) + '...' : null,
     },
-    cache     : cacheStats(),
+    cache : {},
     cors      : { allowedOrigin },
     rateLimit : { limit: 10, windowSeconds: 60 },
   });
